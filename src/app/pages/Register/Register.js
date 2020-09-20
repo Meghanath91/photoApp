@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
+import UploadImage from "../../components/UploadImage/UploadImage";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -65,6 +66,7 @@ export default function Register() {
         autoComplete="Address"
         autoFocus
       />
+      <UploadImage />
       <Button
         type="submit"
         fullWidth
