@@ -6,6 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Home from "./app/pages/Home/Home";
 import Login from "./app/pages/Login/Login";
 import Register from "./app/pages/Register/Register";
 export default function Routes() {
@@ -14,7 +15,7 @@ export default function Routes() {
       {/* <Navbar /> */}
       <Switch>
         <Route path="/" exact>
-          {/* <Home /> */}
+          <Home />
         </Route>
 
         <Route path="/register">

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullname] = useState("");
+
+  const handleLogin = (evt) => {
+    evt.preventDefault();
+  };
+
   return (
-    <form>
+    <form onSubmit={handleLogin} className="register-container">
       <h1>Register</h1>
       <TextField
         variant="outlined"
