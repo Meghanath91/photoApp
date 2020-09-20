@@ -5,7 +5,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullname] = useState("");
-
+  const [address, setAddress] = useState("");
   const handleLogin = (evt) => {
     evt.preventDefault();
   };
@@ -21,7 +21,7 @@ export default function Register() {
         id="name"
         name="Name"
         value={fullName}
-        onChange={(e) => setFullname(e.target.value)}
+        onChange={setFullname}
         label="Full name"
         autoComplete="email"
         autoFocus
@@ -34,7 +34,7 @@ export default function Register() {
         id="email"
         name="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={setEmail}
         label="Email Address"
         autoComplete="email"
         autoFocus
@@ -46,11 +46,24 @@ export default function Register() {
         fullWidth
         name="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={setPassword}
         label="Password"
         type="password"
         id="password"
         autoComplete="current-password"
+      />
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="Address"
+        name="Address"
+        value={address}
+        onChange={setAddress}
+        label="Address"
+        autoComplete="Address"
+        autoFocus
       />
       <Button
         type="submit"
