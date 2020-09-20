@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
-
+import "./login.scss";
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [loggedin, setLoggedin] = useState(false);
+
+  const handleLogin = (evt) => {
+    evt.preventDefault();
+
+    // axios
+    //   .post(`/${user === "trainer" ? "trainers" : "students"}/login`, {
+    //     email: email,
+    //     password: password,
+    //   })
+    //   .then((res) => {
+    //     localforage.setItem("user", res.data, () => {
+    //       localforage.setItem("usertype", user);
+    //       setLoggedin(true);
+
+    //       user === "trainer"
+    //         ? props.setTrainer(res.data)
+    //         : props.setStudent(res.data);
+    //     });
+    //   });
+  };
+
   return (
-    <form>
-      <h1>Login</h1>
+    <form onSubmit={handleLogin} className="login-container">
+      <h1>LOGIN</h1>
       <TextField
         variant="outlined"
         margin="normal"
@@ -12,8 +36,8 @@ export default function Login() {
         fullWidth
         id="email"
         name="email"
-        // value={email}
-        // onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         label="Email Address"
         autoComplete="email"
         autoFocus
@@ -24,8 +48,8 @@ export default function Login() {
         required
         fullWidth
         name="password"
-        // value={password}
-        // onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         label="Password"
         type="password"
         id="password"

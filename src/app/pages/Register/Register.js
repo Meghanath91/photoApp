@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullname] = useState("");
   return (
     <form>
       <h1>Register</h1>
@@ -12,8 +15,8 @@ export default function Login() {
         fullWidth
         id="name"
         name="Name"
-        // value={email}
-        // onChange={(e) => setEmail(e.target.value)}
+        value={fullName}
+        onChange={(e) => setFullname(e.target.value)}
         label="Full name"
         autoComplete="email"
         autoFocus
@@ -25,8 +28,8 @@ export default function Login() {
         fullWidth
         id="email"
         name="email"
-        // value={email}
-        // onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         label="Email Address"
         autoComplete="email"
         autoFocus
@@ -37,8 +40,8 @@ export default function Login() {
         required
         fullWidth
         name="password"
-        // value={password}
-        // onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         label="Password"
         type="password"
         id="password"
