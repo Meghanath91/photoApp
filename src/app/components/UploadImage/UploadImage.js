@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { DropzoneArea } from "material-ui-dropzone";
 
-export default function UploadImage() {
-  const [upload, setUpload] = useState();
-
+export default function UploadImage({ setUpload }) {
   const handleChange = (files) => {
     setUpload(files);
-    console.log(upload);
   };
   return (
     <div>
