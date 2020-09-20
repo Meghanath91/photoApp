@@ -12,7 +12,7 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleLogin} className="register-container">
+    <form onSubmit={handleLogin} className="login-container">
       <h1>Register</h1>
       <TextField
         variant="outlined"
