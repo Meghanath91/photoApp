@@ -7,6 +7,9 @@ import { useHistory } from "react-router-dom";
 
 export default function Navbar() {
   const history = useHistory();
+  const handleLogo = () => {
+    history.push("/");
+  };
   const handleLogin = () => {
     history.push("/login");
   };
@@ -14,13 +17,15 @@ export default function Navbar() {
     history.push("/register");
   };
   const handleLogout = () => {
-    return history.push("/");
+    history.push("/");
   };
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h5">PhotoApp</Typography>
+          <Button onClick={handleLogo} color="inherit">
+            PhotoApp
+          </Button>
           <Button onClick={handleLogin} color="inherit">
             Login
           </Button>

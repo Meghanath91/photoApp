@@ -1,20 +1,51 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import UploadImage from "../../components/UploadImage/UploadImage";
+import axios from "axios";
+import localforage from "localforage";
+import { useHistory } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullname] = useState("");
+  const [username, setUsername] = useState("");
   const [address, setAddress] = useState("");
   const [upload, setUpload] = useState();
-  const handleLogin = (evt) => {
+  const history = useHistory();
+
+  const handleRegister = (evt) => {
     evt.preventDefault();
-    console.log({ email, password, fullName, address, upload });
+    const newUser = {
+      email,
+      password,
+      username,
+      address,
+      upload,
+    };
+    console.log(newUser);
+    axios
+      .post(`http://localhost:8080/api/register`, newUser)
+      .then(async (res) => {
+        const TOKEN = res.data.token;
+        if (TOKEN) {
+          await axios
+            .get(`http://localhost:8080/api/me`, {
+              headers: {
+                "Content-Type": "application/json",
+                token: TOKEN,
+              },
+            })
+            .then(async (res) => {
+              localforage.setItem("user", res.data, async () => {
+                await history.push("/user", { params: res.data });
+              });
+            });
+        }
+      });
   };
 
   return (
-    <form onSubmit={handleLogin} className="login-container">
+    <form onSubmit={handleRegister} className="login-container">
       <h1>REGISTER</h1>
       <TextField
         variant="outlined"
@@ -23,8 +54,8 @@ export default function Register() {
         fullWidth
         id="name"
         name="Name"
-        value={fullName}
-        onChange={(e) => setFullname(e.target.value)}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         label="Full name"
         // autoComplete="email"
         autoFocus

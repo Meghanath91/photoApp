@@ -1,30 +1,43 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import localforage from "localforage";
+// import localforage from "localforage";
+import axios from "axios";
 import "./login.scss";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
   // const [loggedin, setLoggedin] = useState(false);
 
-  const handleLogin = (evt) => {
+  const handleLogin = async (evt) => {
     evt.preventDefault();
 
-    // axios
-    //   .post(`/${user === "trainer" ? "trainers" : "students"}/login`, {
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then((res) => {
-    //     localforage.setItem("user", res.data, () => {
-    //       localforage.setItem("usertype", user);
-    //       setLoggedin(true);
-
-    //       user === "trainer"
-    //         ? props.setTrainer(res.data)
-    //         : props.setStudent(res.data);
-    //     });
-    //   });
+    axios.defaults.withCredentials = true;
+    await axios
+      .post(`http://localhost:8080/api/login`, {
+        email: email,
+        password: password,
+      })
+      .then(async (res) => {
+        const TOKEN = res.data.token;
+        if (TOKEN) {
+          await axios
+            .get(`http://localhost:8080/api/me`, {
+              headers: {
+                "Content-Type": "application/json",
+                token: TOKEN,
+              },
+            })
+            .then(async (res) => {
+              localforage.setItem("user", res.data, async () => {
+                await history.push("/user", { params: res.data });
+              });
+            });
+        }
+      });
   };
 
   return (
@@ -56,13 +69,7 @@ export default function Login() {
         id="password"
         autoComplete="current-password"
       />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        // className={classes.submit}
-      >
+      <Button type="submit" fullWidth variant="contained" color="primary">
         Sign In
       </Button>
     </form>

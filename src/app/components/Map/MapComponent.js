@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
-const MapContainer = () => {
+const MapContainer = ({ address }) => {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   // const [address,setAddress]=useState("")
@@ -17,7 +17,7 @@ const MapContainer = () => {
   };
   useEffect(() => {
     Geocode.setApiKey("AIzaSyBRr3imfTKMqoxRaiPfC7lKHG0Z9KtMBhY");
-    Geocode.fromAddress("2233 Eglinton Avenue East").then((response) => {
+    Geocode.fromAddress(address).then((response) => {
       const { lat, lng } = response.results[0].geometry.location;
       console.log(typeof lat, lng);
       setLatitude(lat);
