@@ -1,44 +1,44 @@
 import React, { useState, useEffect } from "react";
+import "./map.scss";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 const MapContainer = ({ address }) => {
+  const API_KEY = process.env.REACT_APP_GOOGLE_API;
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
-  // const [address,setAddress]=useState("")
-  // const [map, setMap] = React.useState(null);
-  const mapStyles = {
-    height: "100vh",
-    width: "100%",
-  };
+
+  // const mapStyles = {
+  //   height: "50vh",
+  //   width: "50%",
+  //   borderRadius: "25px",
+  // };
 
   const defaultCenter = {
-    lat: 43.730082,
-    lng: -79.2750373,
+    lat: latitude,
+    lng: longitude,
   };
   useEffect(() => {
-    Geocode.setApiKey("AIzaSyBRr3imfTKMqoxRaiPfC7lKHG0Z9KtMBhY");
+    Geocode.setApiKey(API_KEY);
     Geocode.fromAddress(address).then((response) => {
       const { lat, lng } = response.results[0].geometry.location;
-      console.log(typeof lat, lng);
-      setLatitude(lat);
-      setLongitude(lng);
+
+      setLatitude(Number(lat));
+      setLongitude(Number(lng));
     });
   }, [latitude, longitude]);
-  // const onLoad = React.useCallback(function callback(map) {
-  //   const bounds = new window.google.maps.LatLngBounds();
-  //   map.fitBounds(bounds);
-  //   setMap(map);
-  // }, []);
 
   return latitude && longitude ? (
     <LoadScript googleMapsApiKey="AIzaSyBRr3imfTKMqoxRaiPfC7lKHG0Z9KtMBhY">
       <GoogleMap
-        mapContainerStyle={mapStyles}
+        // mapContainerStyle={mapStyles}
         zoom={13}
         center={defaultCenter}
-        // onLoad={onLoad}
+        id="map-container"
       >
-        <Marker position={{ lat: Number(latitude), lng: Number(longitude) }} />
+        <Marker
+          position={{ lat: latitude, lng: longitude }}
+          setLabel={address}
+        />
       </GoogleMap>
     </LoadScript>
   ) : (

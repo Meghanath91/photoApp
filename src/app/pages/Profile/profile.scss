@@ -1,0 +1,21 @@
+.profile-container {
+  display: flex;
+  justify-content: space-around;
+}
+.avatar {
+  width: 250px;
+  border-radius: 50%;
+}
+.img-name-container {
+  text-align: center;
+}
+@media only screen and (max-width: 768px) {
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .avatar {
+    width: 150px;
+    border-radius: 50%;
+  }
+}

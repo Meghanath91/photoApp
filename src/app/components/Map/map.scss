@@ -1,0 +1,13 @@
+#map-container {
+  margin: 2%;
+  height: 50vh;
+  width: 50%;
+  border-radius: 25px;
+}
+@media only screen and (max-width: 768px) {
+  #map-container {
+    height: 50vh;
+    width: 100%;
+    border-radius: 25px;
+  }
+}

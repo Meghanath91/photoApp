@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import AuthContext from "./app/context/context";
 
 import "./App.css";
 import Routes from "./Routes";
 
 function App() {
+  const [user, setUser] = useState();
   return (
-    <div className="App">
+    <AuthContext.Provider value={{ user, setUser }} className="App">
       <Routes />
-    </div>
+    </AuthContext.Provider>
   );
 }
 
