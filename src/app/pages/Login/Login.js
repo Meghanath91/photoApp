@@ -69,7 +69,7 @@ export default function Login() {
         id="password"
         autoComplete="current-password"
       />
-      <Button type="submit" fullWidth variant="contained" color="primary">
+      <Button type="submit" fullWidth variant="contained" id="btn-class">
         Sign In
       </Button>
     </form>

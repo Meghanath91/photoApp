@@ -100,7 +100,7 @@ export default function Register() {
         autoFocus
       />
       <UploadImage upload={upload} setUpload={setUpload} />
-      <Button type="submit" fullWidth variant="contained" color="primary">
+      <Button type="submit" fullWidth variant="contained" id="btn-class">
         Register
       </Button>
     </form>
