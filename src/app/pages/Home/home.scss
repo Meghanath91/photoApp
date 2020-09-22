@@ -1,0 +1,18 @@
+.home {
+  display: flex;
+  width: 100%;
+}
+.caption {
+  margin: auto;
+  font-size: 2rem;
+}
+@media only screen and (max-width: 768px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+  }
+  .caption {
+    margin: auto;
+    font-size: 1rem;
+  }
+}

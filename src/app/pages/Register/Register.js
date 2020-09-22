@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, TextField } from "@material-ui/core";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import axios from "axios";
 import localforage from "localforage";
 import { useHistory } from "react-router-dom";
+import AuthContext from "../../context/context";
 
 export default function Register() {
+  const { setUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -36,6 +38,7 @@ export default function Register() {
               },
             })
             .then(async (res) => {
+              await setUser(res.data);
               localforage.setItem("user", res.data, async () => {
                 await history.push("/user", { params: res.data });
               });
