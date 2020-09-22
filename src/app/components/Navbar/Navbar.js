@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
-import "./Navbar.scss";
+import localforage from "localforage";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
+import "./Navbar.scss";
 import { useHistory } from "react-router-dom";
-// import AuthContext from "../../context/context";
+import AuthContext from "../../context/context";
 export default function Navbar() {
-  // const { user, setUser } = useContext(AuthContext);
-  // console.log(user);
+  const { user, setUser } = useContext(AuthContext);
+  console.log(user, "in navbar");
   const history = useHistory();
   const handleLogo = () => {
     history.push("/");
@@ -19,6 +20,8 @@ export default function Navbar() {
     history.push("/register");
   };
   const handleLogout = () => {
+    // localforage.clear();
+    setUser(null);
     history.push("/");
   };
   return (
@@ -31,15 +34,20 @@ export default function Navbar() {
             </Button>
           </div>
           <div>
-            <Button onClick={handleLogin} color="inherit">
-              Login
-            </Button>
-            <Button onClick={handleRegister} color="inherit">
-              Register
-            </Button>
-            <Button onClick={handleLogout} color="inherit">
-              Logout
-            </Button>
+            {user ? (
+              <Button onClick={handleLogout} color="inherit">
+                Logout
+              </Button>
+            ) : (
+              <div>
+                <Button onClick={handleLogin} color="inherit">
+                  Login
+                </Button>
+                <Button onClick={handleRegister} color="inherit">
+                  Register
+                </Button>
+              </div>
+            )}
           </div>
         </Toolbar>
       </AppBar>
