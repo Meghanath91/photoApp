@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import axios from "axios";
 import localforage from "localforage";
-import { useHistory } from "react-router-dom";
 import AuthContext from "../../context/context";
 
 export default function Register() {
@@ -24,7 +24,7 @@ export default function Register() {
       address,
       upload,
     };
-    console.log(newUser);
+    //make POST req to /register with user obj and upon successfully resolve make GET req to get user
     axios
       .post(`http://localhost:8080/api/register`, newUser)
       .then(async (res) => {

@@ -5,8 +5,9 @@ import "./App.css";
 import Routes from "./Routes";
 
 function App() {
+  //setup context to distribute user state globally
   const [user, setUser] = useState();
-  console.log(user, "in app.js");
+
   return (
     <AuthContext.Provider value={{ user, setUser }} className="App">
       <Routes />

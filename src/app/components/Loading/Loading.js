@@ -2,6 +2,7 @@ import React from "react";
 import Lottie from "react-lottie";
 import animationData from "../../lotties/profile.json";
 import "./loading.scss";
+//home page animation
 const Loading = (props) => {
   const { height, width } = props;
   const defaultOptions = {

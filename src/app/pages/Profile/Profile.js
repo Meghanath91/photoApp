@@ -1,10 +1,12 @@
 import React from "react";
-import "./profile.scss";
 import { useLocation } from "react-router-dom";
+import "./profile.scss";
 import MapContainer from "../../components/Map/MapComponent";
+//this is responsible for displaying profile
 export default function Profile() {
+  //to get data from login page
   const location = useLocation();
-  const { username, address, image } = location.state.params;
+  const { username, address } = location.state.params;
 
   return (
     <div className="profile-container">

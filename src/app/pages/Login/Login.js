@@ -7,6 +7,7 @@ import "./login.scss";
 import AuthContext from "../../context/context";
 
 export default function Login() {
+  //using context to set a global state user
   const { setUser } = useContext(AuthContext);
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ export default function Login() {
     evt.preventDefault();
 
     axios.defaults.withCredentials = true;
+    //POST call to login route and upon successfully resolve it with JWtoken make a GET request to get user data
     await axios
       .post(`http://localhost:8080/api/login`, {
         email: email,
@@ -32,7 +34,9 @@ export default function Login() {
               },
             })
             .then(async (res) => {
+              //sets user using context to make it available globally
               await setUser(res.data);
+              //to store user in local session
               localforage.setItem("user", res.data, async () => {
                 await history.push("/user", { params: res.data });
               });

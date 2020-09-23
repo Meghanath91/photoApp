@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import AuthContext from "../../context/context";
 import localforage from "localforage";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import "./Navbar.scss";
-import { useHistory } from "react-router-dom";
-import AuthContext from "../../context/context";
+
 export default function Navbar() {
+  //using context to get loggedin userstate throughout the app as global state
   const { user, setUser } = useContext(AuthContext);
-  console.log(user, "in navbar");
+  //use history to navigate to pages
   const history = useHistory();
+  //this will redirect to home
   const handleLogo = () => {
     history.push("/");
   };
@@ -20,7 +23,8 @@ export default function Navbar() {
     history.push("/register");
   };
   const handleLogout = () => {
-    // localforage.clear();
+    //it will clear local sessions
+    localforage.clear();
     setUser(null);
     history.push("/");
   };
